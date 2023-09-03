@@ -15,12 +15,12 @@ class TitleSubTitleWidget extends StatelessWidget {
     return Column(
       children: [  SizedBox(height: 20,),
     Center(child: 
-      Text('Estilo sin filtros',
+      Text(this.title,
       style: TextStyle(fontSize: 20,
       fontWeight: FontWeight.bold))),
      SizedBox(height: 2,),
     Center(child: 
-      Text('Hasta 15% de descuento',
+      Text(this.subtitle,
       style: TextStyle(fontSize: 20, ))),],
     );
   }
