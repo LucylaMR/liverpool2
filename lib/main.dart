@@ -5,6 +5,8 @@ import './widgets/puntitos_widget.dart';
 import './widgets/product_view.dart';
 import './services/product_service.dart';
 import 'package:flutter/services.dart';
+import './widgets/titlesubtitle_widget.dart';
+import './services/section_service.dart';
 
 void main() => runApp(const MyApp());
 
@@ -145,8 +147,36 @@ class _MyAppState extends State<MyApp> {
                   )
                 ],
               ),
+
+              TitleSubTitleWidget(title: 'Estilo sin filtro',subtitle: 'Hasta 15% de descuento',),
+            
+              SizedBox(height: 20,),
+               FutureBuilder(
+                  future: getSections(1),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Container(
+                        height: 220.0,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: snapshot.data?.length,
+                            itemBuilder: (context, index) {
+                              return (ProductView(
+                                  name: snapshot.data![index].name.toString(),
+                                  url: snapshot.data![index].image.toString(),
+                                  price: 0.0));
+                            }),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
             ],
           )),
     );
   }
 }
+
+
